@@ -1,0 +1,7 @@
+{
+  "name": "Antti's what to eat",
+  "description": "Wanna know what to eat, try this",
+  "repository": "https://github.com/anttitevanlinna",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["food"]
+}
