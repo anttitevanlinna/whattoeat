@@ -4,3 +4,7 @@ node_js:
 before_install:
   - npm install nodeunit
 script: nodeunit test
+deploy:
+  provider: heroku
+  api_key: "a9a9495a-af40-48dc-bafd-823a5c933cad"
+  app: shrouded-shore-2820
