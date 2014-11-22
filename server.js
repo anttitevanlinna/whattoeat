@@ -12,18 +12,14 @@ module.exports = function(callback){
   app.get('/', function(request, response) {
     response.send( foods.random() );
   })
-
-  app.get('/api/todos', function(req, res) {
-    response.send( foods() );
-  });
-
   var server = app.listen(app.get('port'), function() {
     console.log("Node app is running at localhost:" + app.get('port'))
   })
-  app.get('/quit', function(req,res) {
+/*  app.get('/quit', function(req,res) {
     res.send('closing..');
     server.close();
   });
+*/
 
   return app; 
 }

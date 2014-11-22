@@ -4,7 +4,6 @@ module.exports.random = function(callback){
 }
 
 module.exports.isvalid = function(string){
-  console.log('Got: '+string)
   return 3 < string.length;
 }
 
