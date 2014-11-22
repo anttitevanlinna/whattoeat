@@ -2,9 +2,8 @@ var foods = require('../foods');
 
 exports['return'] = function (test) {
     
-    out = foods();
-    console.log(out);
+    out = foods.random();
   
-    test.notEqual(out,'bar');
+    test.ok(foods.isvalid(out));
     test.done();
 };
