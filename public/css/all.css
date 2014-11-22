@@ -1,0 +1,21 @@
+/**
+ * whattoeat
+ */
+body{
+background-image: url('http://1.bp.blogspot.com/-PC_5JXttmZM/UB7Cf7fK7-I/AAAAAAAAG8o/qiu9c7U8FZA/s1600/PennePasta+%25287%2529.jpg');
+//background: linear-gradient(45deg, #f06, black);
+min-height: 100%;
+}
+
+h1 {
+background: #eeeeee;
+opacity: 0.7;
+text-align: center;
+}
+
+span{
+font-size: large;
+text-align: center;
+}
+
+
