@@ -6,7 +6,6 @@ function mainController($scope, $http) {
     $http.get('/api/randomfood')
         .success(function(data) {
             $scope.currentfood = data;
-            console.log(data);
         })
         .error(function(data) {
             console.log('Error: ' + data);
@@ -22,4 +21,15 @@ function mainController($scope, $http) {
                 console.log('Error: ' + data);
             });
     };
+
+    $scope.next = function() {
+        $http.post('/api/randomfood', $scope.formData)
+            .success(function(data) {
+              $scope.currentfood = data;
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    };
+
 }
