@@ -3,7 +3,7 @@ var foods = angular.module('foods', []);
 function mainController($scope, $http) {
     $scope.formData = {};
 
-    $http.get('/api/food')
+    $http.get('/api/randomfood')
         .success(function(data) {
             $scope.currentfood = data;
             console.log(data);
