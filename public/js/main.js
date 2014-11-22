@@ -23,7 +23,7 @@ function mainController($scope, $http) {
     };
 
     $scope.next = function() {
-        $http.post('/api/randomfood', $scope.formData)
+        $http.get('/api/randomfood', $scope.formData)
             .success(function(data) {
               $scope.currentfood = data;
             })
