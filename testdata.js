@@ -1,2 +1,2 @@
 var foods = require('./seedfoods');
-foods('foods',{});
+foods('foods',function(){});

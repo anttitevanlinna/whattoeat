@@ -1,6 +1,12 @@
+// calls back with the chosen food
 module.exports.random = function(callback){
-  var foods = this.foodlist();
-  return foods[Math.floor(Math.random()*foods.length)];
+  
+  var db = require('./db');
+  db.connect(function(collection){
+    db.getfoods(collection, function(foods){
+      callback( foods[Math.floor(Math.random()*foods.length)] );
+    })
+  });
 }
 
 module.exports.isvalid = function(string){

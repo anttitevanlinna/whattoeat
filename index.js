@@ -3,11 +3,13 @@ var foods = require('./foods');
 var app = express();
 
 
-app.set('port', (process.env.PORT || 5000))
+app.set('port', (process.env.PORT || 8080))
 app.use(express.static(__dirname + '/public'))
 
 app.get('/api/randomfood', function(request, response) {
-  response.send( foods.random() );
+  foods.random(function(item){
+    response.send(item);  
+  });
 })
 
 app.listen(app.get('port'), function() {
