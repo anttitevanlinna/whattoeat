@@ -2,7 +2,7 @@ module.exports = function(collectionName, callback2){
   
 var mongodb = require('mongodb');
 var uri = 'mongodb://heroku_app31811253:g4s8gcd4h69dtde70iqof74p7b@ds051990.mongolab.com:51990/heroku_app31811253';
-var foods = require('./foods');
+var foods = require('../foods');
 
 mongodb.MongoClient.connect(uri, function(err, db) {
   var foodcollection = db.collection(collectionName);
