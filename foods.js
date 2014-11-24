@@ -1,6 +1,7 @@
 // calls back with the chosen food
 module.exports.random = function(callback){
-  
+
+  console.log('getting a random food');
   var db = require('./db');
   db.connect(function(collection){
     db.getfoods(collection, function(foods){

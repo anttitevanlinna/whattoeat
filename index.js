@@ -8,7 +8,8 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('/api/randomfood', function(request, response) {
   foods.random(function(item){
-    response.send(item);  
+      console.log(item);
+      response.send(item); 
   });
 })
 
