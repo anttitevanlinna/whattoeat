@@ -7,11 +7,19 @@ module.exports['addandremove'] = function (test) {
   db.collectionName = 'testfoods';
 
   seed('testfoods', function(){
-//    test.ok(db.getfoods()[0].length > 0);
-    console.log('checking');
-    test.done();
+    console.log('checking 1');
+    db.connect(function(collection){
+      console.log('checking 2');
+      db.getfoods(collection, function(items){
+        test.ok(items.length > 0);
+        console.log('checking 3');
+        db.close();
+        console.log('checking 4');
+        test.done();
+      });
+      console.log('checking 5');
+      
+    });
   });
-
-  test.done();
   
 };
