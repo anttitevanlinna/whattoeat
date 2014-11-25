@@ -23,3 +23,23 @@ module.exports['addandremove'] = function (test) {
   });
   
 };
+
+module.exports['findafood'] = function (test) {
+  test.expect(2);
+  
+  var db = require('../db');
+  var seed = require('../utils/seedfoods');
+  db.collectionName = 'testfoods';
+  seed('testfoods', function(){
+    db.connect(function(collection){
+      db.getfoodbyname(collection, 'pasta', function(item){
+        test.equal(item.name, 'pasta', 'was expecting pasta but got '+ item.name);        
+        db.getfoodbyname(collection, 'pasta22', function(item){
+          test.equal(item, null, 'was expecting null but got '+ item);      
+          db.close();
+          test.done();
+        });  
+      });  
+    });
+  });
+}

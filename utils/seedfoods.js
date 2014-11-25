@@ -1,11 +1,10 @@
 module.exports = function(collectionName, callback2){
   
-var mongodb = require('mongodb');
-var uri = 'mongodb://heroku_app31811253:g4s8gcd4h69dtde70iqof74p7b@ds051990.mongolab.com:51990/heroku_app31811253';
+var db = require('../db');
 var foods = require('../foods');
+db.collectionName = 'testfoods';
 
-mongodb.MongoClient.connect(uri, function(err, db) {
-  var foodcollection = db.collection(collectionName);
+db.connect( function( foodcollection ){
   var insertlist = [];
   foods.foodlist().forEach( function(item) {
     insertlist.push({ name: item });
@@ -16,20 +15,15 @@ mongodb.MongoClient.connect(uri, function(err, db) {
            console.log('insert done');
            if(err) {
              console.log(err);
-             callback(err); 
+             callback2(err); 
            }
-
-          db.close(function (err) {
-            if(err) {
-              console.log(err);
-              callback(err); 
-            }
-           });
+          
           console.log('insert done '+result);
           callback2(result);
         }
    );
-});
   
+});
+
 }
 
