@@ -1,12 +1,14 @@
+
 module.exports = function(collectionName, callback2){
   
-var db = require('../db');
-var foods = require('../foods');
-db.collectionName = 'testfoods';
+var foodlist = ['pasta', 'pizza', 'soup', 'nothing', 'candy','fettucine alfredo','ham and eggs', 'steak', 'beef stew'];
 
-db.connect( function( foodcollection ){
+var db = require('../db');
+db.collectionName = collectionName;
+
+db.connect( collectionName, function( foodcollection ){
   var insertlist = [];
-  foods.foodlist().forEach( function(item) {
+  foodlist.forEach( function(item) {
     insertlist.push({ name: item });
   }); 
   
@@ -25,5 +27,11 @@ db.connect( function( foodcollection ){
   
 });
 
+}
+
+
+
+module.exports.isvalid = function(string){
+  return 3 < string.length;
 }
 

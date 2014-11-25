@@ -2,10 +2,9 @@
   var uri = 'mongodb://heroku_app31811253:g4s8gcd4h69dtde70iqof74p7b@ds051990.mongolab.com:51990/heroku_app31811253';
 var mdb = null;
 var foodcollection;
-var collectionName = 'foods';
 
 // calls back when connection is there, with the collection
-module.exports.connect = function( callback ){
+module.exports.connect = function( collectionName, callback ){
      if (mdb === null) {    
        console.log('connection to '+ collectionName);
        mongodb.MongoClient.connect(uri, function(err, db) {
@@ -49,6 +48,17 @@ module.exports.connect = function( callback ){
          callback(item);
        }); 
  }
+ 
+ // calls back with the chosen food
+ module.exports.random = function(callback){
+
+  console.log('getting a random food');
+  connect(function(collection){
+     getfoods(collection, function(foods){
+      callback( foods[Math.floor(Math.random()*foods.length)] );
+    })
+  });
+}
   
  module.exports.close = function(){
     console.log('db closing...');

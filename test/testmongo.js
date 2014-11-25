@@ -4,11 +4,11 @@ module.exports['addandremove'] = function (test) {
   
   var db = require('../db');
   var seed = require('../utils/seedfoods');
-  db.collectionName = 'testfoods';
 
   seed('testfoods', function(){
     console.log('checking 1');
-    db.connect(function(collection){
+    db.connect('testfoods'
+               , function(collection){
       console.log('checking 2');
       db.getfoods(collection, function(items){
         test.ok(items.length > 0);        
@@ -29,9 +29,8 @@ module.exports['findafood'] = function (test) {
   
   var db = require('../db');
   var seed = require('../utils/seedfoods');
-  db.collectionName = 'testfoods';
   seed('testfoods', function(){
-    db.connect(function(collection){
+    db.connect('testfoods',function(collection){
       db.getfoodbyname(collection, 'pasta', function(item){
         test.equal(item.name, 'pasta', 'was expecting pasta but got '+ item.name);        
         db.getfoodbyname(collection, 'pasta22', function(item){
