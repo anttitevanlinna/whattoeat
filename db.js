@@ -37,7 +37,7 @@ module.exports.connect = function( collectionName, callback ){
        });
   };
 
- module.exports.getfoodbyname = function( foodcollection, name,   callback){
+module.exports.getfoodbyname = function( foodcollection, name,   callback){
   var query = {name: name};
   foodcollection.findOne(query, 
        function(err, item){
@@ -50,15 +50,28 @@ module.exports.connect = function( collectionName, callback ){
  }
  
  // calls back with the chosen food
- module.exports.random = function(callback){
-
-  console.log('getting a random food');
-  connect(function(collection){
-     getfoods(collection, function(foods){
+module.exports.random = function(callback){
+  module.exports.connect('foods',function(collection){
+     module.exports.getfoods(collection, function(foods){
       callback( foods[Math.floor(Math.random()*foods.length)] );
     })
   });
 }
+
+module.exports.insert = function(insertlist, callback){
+   foodcollection.insert(insertlist,
+        function (err, result) {
+           if(err) {
+             console.log(err);
+             callback(err); 
+           }
+          
+          console.log('insert done '+result);
+          callback(result);
+        }
+   );
+}
+
   
  module.exports.close = function(){
     console.log('db closing...');

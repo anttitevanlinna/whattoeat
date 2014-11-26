@@ -1,30 +1,70 @@
 <!-- index.html -->
 <!doctype html>
-
 <!-- ASSIGN OUR ANGULAR MODULE -->
-<html ng-app="foods">
+<html lang="en" ng-app="foods">
 <head>
-    <!-- META -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
 
     <title>The whattoeat App</title>
-<!-- SPELLS -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
-    <script src="/js/main.js"></script>
 
-  <link rel="stylesheet" href="/css/all.css"/>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+<script src="/js/main.js"></script>
+<link rel="stylesheet" href="/css/all.css"/>
+
 </head>
 
 <body ng-controller="mainController">
- <h1 class="opaque">How about having some {{ currentfood.name }}
- </h1>
- <div ng-click="next()"> 
-  don't like it?  <br/>
-  <a href="">next one, please</a>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-1"> 
+    <br/>  
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-1">  
+    </div>
+  <div class="col-xs-10 opaque">
+     <h1 class="text-center">How about having some {{ currentfood.name }}
+     </h1>
+    <div class="col-xs-1">  
+    </div>
+  </div>
 </div>
-
+<div class="row">
+      <div class="col-xs-1"> 
+        <br/>  
+</div>
+</div>
+  <div class="row">
+    <div class="col-xs-2">  
+    </div>
+    <div class="col-xs-3 next btn" ng-click="next()">
+      don't like it?  <br/>
+      <a href="">next one, please</a>
+    </div>
+    <div class="col-xs-2">  
+    </div>
+    <div class="col-xs-3 add btn" ng-click="addFood()"> 
+      don't see it?  <br/>
+      <a href="">add one food</a>
+    </div>
+    <div class="col-xs-2">  
+    </div>
+  </div>
+</div>
 </body>
 </html>
   
