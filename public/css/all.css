@@ -13,6 +13,7 @@ background-color:rgba(256, 256, 256, 0.7);
 
 .pad{
   padding: 30px;
+  margin-top; 60px;
 }
 
 .btn{
@@ -31,5 +32,10 @@ background-color:rgba(256, 0, 0, 0.7);
 .add{
 background-color:rgba(0, 256, 0, 0.7);
 }
+  
+.navbar{
+background-color:rgba(0, 0, 0, 0.8);
+}
+
 
 

@@ -58,7 +58,25 @@ module.exports.random = function(callback){
   });
 }
 
-module.exports.insert = function(insertlist, callback){
+module.exports.add = function(food, callback){
+    module.exports.connect('foods',function(collection){
+      module.exports.addfood(collection, food, function(result){
+        callback(result);
+      });
+    });                    
+}
+
+module.exports.addfood = function(foodcollection, item, callback){
+  module.exports.addfoodlist(foodcollection, [item], callback);
+}
+
+module.exports.addfoodlist = function(foodcollection, list, callback){
+  
+  var insertlist = [];
+  list.forEach( function(item) {
+    insertlist.push({ name: item });
+  }); 
+
    foodcollection.insert(insertlist,
         function (err, result) {
            if(err) {
