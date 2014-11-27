@@ -26,8 +26,23 @@
 
 </head>
 
+  <a name="home"/>
+  
 <body ng-controller="mainController">
-<div class="container-fluid pad">
+
+<div class="container-fluid">
+<nav class="navbar navbar-top">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">the whattoeat app</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#why">Why</a></li>
+      </ul>
+   </div>
+</nav>      
+  
   <div class="row">
     <div class="col-xs-1"> 
     <br/>  
@@ -43,26 +58,52 @@
     <div class="col-sm-6 column">
       <div class="next btn wide" ng-click="next()">
         don't like it?  <br/>
-        <a href="">next one, please</a>
+      <button type="submit" class="btn btn-success btn-lg btn-block">
+         Next...
+      </button>
       </div>
     </div>
     <div class="col-sm-6 column"> 
-      <div class="add btn wide" ng-click="add()">
+      <div class="add btn wide">
 <form>
       <div id="food-group" class="form-group">
-        <label>Food Name</label>
+        <label>Don't see your favorite? Add it here</label>
         <input type="text" name="food" class="form-control" placeholder="Mac and Cheese">
         <span class="help-block"></span>
       </div>
 
-      <button type="submit" class="btn btn-success btn-lg btn-block">
-        <span class="glyphicon glyphicon-flash"></span> Submit!
+      <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="add()">
+         Submit
       </button>
     </form>
       </div>
     </div>
   </div>
-</div>
+
+ <div class="row pad">
+    <a name="home"/>
+    <div class="col-xs-12 opaque">
+       <h1 class="text-center">why
+       </h1>
+       <p>
+      Food selection is pretty much always a series of "how about this" and "how about that". The answer per dish is yes or no. This app simply makes the suggestion more varied than your brain could ever do. 
+       </p>
+       <p>
+Later down the line, I'll add a bit of fuzzy logic that prefers your personal favorites, while still suggesting now and then some novelties. 
+      </p>
+       <p>
+Hope you like it. 
+      </p>
+             <p>
+... And code contributions welcome. Contact me in twitter: anttitevanlinna is my nick. 
+      </p>
+
+    
+    </div>
+  </div>
+
+
+  </div>
 </body>
 </html>
   
