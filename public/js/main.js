@@ -11,10 +11,13 @@ function mainController($scope, $http) {
             console.log('Error: ' + data);
         });
 
-    $scope.addFood = function() {
-        $http.post('/api/addfood', $scope.formData)
+    $scope.add = function() {
+        var formData = {
+					'food' 				: $('input[name=food]').val(),
+				};
+        console.log(formData);
+        $http.post('/api/add', $scope.formData)
             .success(function(data) {
-                $scope.formData = {}; // clear 
                 console.log(data);
             })
             .error(function(data) {

@@ -42,3 +42,21 @@ module.exports['findafood'] = function (test) {
     });
   });
 }
+
+module.exports.testAddFind = function(test){
+
+    test.expect(1);
+
+  var db = require('../db');
+  var randomname = 'string'+Date.now().toString();
+  db.connect('testfoods',function(collection){
+    db.addfood(collection, randomname, function(){
+      db.getfoodbyname(collection, randomname, function(item){
+        test.equal(item.name, randomname, 'was expecting pasta but got '+ item.name);        
+        db.close();
+        test.done();
+      });
+    });
+  });
+    
+}

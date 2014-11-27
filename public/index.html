@@ -47,9 +47,18 @@
       </div>
     </div>
     <div class="col-sm-6 column"> 
-      <div class="add btn wide" ng-click="next()">
-      don't see it?  <br/>
-      <a href="">add one food</a>
+      <div class="add btn wide" ng-click="add()">
+<form>
+      <div id="food-group" class="form-group">
+        <label>Food Name</label>
+        <input type="text" name="food" class="form-control" placeholder="Mac and Cheese">
+        <span class="help-block"></span>
+      </div>
+
+      <button type="submit" class="btn btn-success btn-lg btn-block">
+        <span class="glyphicon glyphicon-flash"></span> Submit!
+      </button>
+    </form>
       </div>
     </div>
   </div>
