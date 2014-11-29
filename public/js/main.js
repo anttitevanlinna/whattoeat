@@ -12,12 +12,14 @@ function mainController($scope, $http) {
         });
 
     $scope.add = function() {
+        var food = $('input[name=food]').val();
         var formData = {
-					'food' 				: $('input[name=food]').val(),
+					'food' 				: food,
 				};
         console.log(formData);
         $http.post('/api/add', formData)
             .success(function(data) {
+                $scope.currentfood = data;
                 console.log(data);
             })
             .error(function(data) {
@@ -34,5 +36,5 @@ function mainController($scope, $http) {
                 console.log('Error: ' + data);
             });
     };
-
+    
 }

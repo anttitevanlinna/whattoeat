@@ -41,14 +41,15 @@
   </div>
   <div class="row pad">
     <div class="col-xs-12 opaque">
-       <h1 class="text-center">How about having some {{ currentfood.name }}
+       <h1 class="text-center">How about having some <span ng-bind="currentfood.name">...food</span>
+         
        </h1>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-6 column">
       <div class="next btn wide" ng-click="next()">
-        don't like it?  <br/>
+        <b>don't like it?<b/>  <br/>
       <button type="submit" class="btn btn-success btn-lg btn-block">
          Next...
       </button>

@@ -61,7 +61,7 @@ module.exports.random = function(callback){
 module.exports.add = function(food, callback){
     module.exports.connect('foods',function(collection){
       module.exports.addfood(collection, food, function(result){
-        callback(result);
+        callback(result[0]);
       });
     });                    
 }

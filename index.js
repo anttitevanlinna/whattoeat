@@ -10,17 +10,15 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/api/randomfood', function(request, response) {
   db.random(function(item){
-      console.log(item);
       response.send(item); 
   });
 })
 
 app.post('/api/add', function(request, response){
   var newfood = request.body.food;
-  console.log(newfood);
+  console.log('adding food' + newfood);
   db.add(newfood, function(item){
-      console.log(item);
-      response.send(newfood); 
+      response.send(item); 
   });
 });
 
