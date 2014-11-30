@@ -32,19 +32,24 @@ module.exports.connect = function( collectionName, callback ){
          if(err){
            console.log(err);
          }
-         console.log('find done');
-         callback(items);
+       callback(items);
        });
   };
 
-module.exports.getfoodbyname = function( foodcollection, name,   callback){
+module.exports.getfoodbyname = function( foodcollection, name, callback){
   var query = {name: name};
   foodcollection.findOne(query, 
        function(err, item){
          if(err){
            console.log('error in getfoodbyname' + err);
          }
-         console.log('find done for '+name +' got '+item);
+         
+         if( item == undefined){
+         }else{
+            item.status = 'ok';         
+         }
+
+        console.log('find done for '+name +' got '+item);
          callback(item);
        }); 
  }
@@ -53,7 +58,9 @@ module.exports.getfoodbyname = function( foodcollection, name,   callback){
 module.exports.random = function(callback){
   module.exports.connect('foods',function(collection){
      module.exports.getfoods(collection, function(foods){
-      callback( foods[Math.floor(Math.random()*foods.length)] );
+       value = foods[Math.floor(Math.random()*foods.length)];
+       value.status = 'ok';
+       callback( value );
     })
   });
 }
@@ -61,13 +68,29 @@ module.exports.random = function(callback){
 module.exports.add = function(food, callback){
     module.exports.connect('foods',function(collection){
       module.exports.addfood(collection, food, function(result){
-        callback(result[0]);
+        var oneitem = result[0];
+        oneitem.status = result.status;
+        console.log('add() '+oneitem);
+        callback(oneitem);
       });
     });                    
 }
 
 module.exports.addfood = function(foodcollection, item, callback){
-  module.exports.addfoodlist(foodcollection, [item], callback);
+  
+  module.exports.getfoodbyname( foodcollection,item, function(result){
+    if(result == undefined ){
+      console.log('add: '+item+' doesnt exists, adding');
+      module.exports.addfoodlist(foodcollection, [item], callback);
+    }else{
+      value = [result];
+      value.status = 'already_exists';
+      console.log('add: '+item+' existed, skipping add '+value);
+      callback(value);
+    }
+
+  });
+  
 }
 
 module.exports.addfoodlist = function(foodcollection, list, callback){
@@ -85,6 +108,7 @@ module.exports.addfoodlist = function(foodcollection, list, callback){
            }
           
           console.log('insert done '+result);
+          result.status = 'ok';
           callback(result);
         }
    );

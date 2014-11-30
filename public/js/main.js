@@ -19,8 +19,11 @@ function mainController($scope, $http) {
         console.log(formData);
         $http.post('/api/add', formData)
             .success(function(data) {
-                $scope.currentfood = data;
                 console.log(data);
+                if( data.status == 'already_exists' ){
+                   data.name = data.name + ' (we got that already)';
+                }
+                $scope.currentfood = data;
             })
             .error(function(data) {
                 console.log('Error: ' + data);
