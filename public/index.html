@@ -6,12 +6,10 @@
     <title>The whattoeat App</title>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>    
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+   
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 <script src="/js/main.js"></script>
 <link rel="stylesheet" href="/css/all.css"/>
@@ -22,57 +20,57 @@
 <body ng-controller="mainController">
 
 <div class="container-fluid">
-<nav id="home" class="navbar navbar-top">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">the whattoeat app</a>
-    </div>
-    <div>
-      <ul class="nav navbar-nav">
-        <li><a href="#why">Why</a></li>
-        <li><a href="#code">Code</a></li>
-      </ul>
-   </div>
-</nav>      
+  <nav id="home" class="navbar navbar-top">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">the whattoeat app</a>
+      </div>
+      <div>
+        <ul class="nav navbar-nav">
+          <li><a href="#why">Why</a></li>
+          <li><a href="#code">Code</a></li>
+        </ul>
+     </div>
+  </nav>      
   
   <div class="row">
     <div class="col-xs-1"> 
-    <br/>  
+      <br/>  
     </div>
   </div>
   <div class="row pad">
     <div class="col-xs-12 opaque">
        <h1 class="text-center">How about having some <span ng-bind="currentfood.name">...food</span>
-         
        </h1>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-6 column">
       <div class="next btn wide" ng-click="next()">
-        <b>don't like it?<b/>  <br/>
-      <button type="submit" class="btn btn-success btn-lg btn-block">
-         Next...
-      </button>
+        <b>don't like it?<b/>  
+        <br/>
+        <button type="submit" class="btn btn-success btn-lg btn-block">
+           Next...
+        </button>
       </div>
     </div>
     <div class="col-sm-6 column"> 
       <div class="add btn wide">
-<form>
-      <div id="food-group" class="form-group">
-        <label>Don't see your favorite? Add it here</label>
-        <input type="text" name="food" class="form-control" placeholder="Mac and Cheese">
-        <span class="help-block"></span>
-      </div>
+        <form>
+        <div id="food-group" class="form-group">
+          <label>Don't see your favorite? Add it here</label>
+          <input type="text" name="food" class="form-control" placeholder="Mac and Cheese">
+          <span class="help-block"></span>
+        </div>
 
-      <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="add()">
-         Submit
-      </button>
-    </form>
+        <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="add()">
+           Submit
+        </button>
+        </form>
       </div>
     </div>
   </div>
 
- <div id="why" class="row pad">
+  <div id="why" class="row pad">
     <div class="col-xs-12 opaque">
        <h1 class="text-center">why
        </h1>
@@ -82,28 +80,24 @@
        <p>
 Later down the line, I'll add a bit of fuzzy logic that prefers your personal favorites, while still suggesting now and then some novelties. 
       </p>
-       <p>
+      <p>
 Hope you like it. 
       </p>
-             <p>
+      <p>
 ... And code contributions welcome. Contact me in twitter: anttitevanlinna is my nick. 
       </p>
-
-    
     </div>
   </div>
 
-   <div id="code" class="row pad">
+  <div id="code" class="row pad">
     <div class="col-xs-12 opaque">
        <h1 class="text-center">Code</h1>
        <p>
 This app is simple .js code. You can find it in: 
-        <li><a href="https://github.com/anttitevanlinna/whattoeat">https://github.com/anttitevanlinna/whattoeat</a></li>. Additionally, a Hekoku account, Travis CI, and a small MongoDb is used. 
+      <a href="https://github.com/anttitevanlinna/whattoeat">https://github.com/anttitevanlinna/whattoeat</a>. Additionally, a Hekoku account, Travis CI, and a small MongoDb is used. 
       </p>
     </div>
   </div>
-
-
   </div>
 </body>
 </html>

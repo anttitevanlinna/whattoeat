@@ -16,7 +16,6 @@ function mainController($scope, $http) {
         var formData = {
 					'food' 				: food,
 				};
-        console.log(formData);
         $http.post('/api/add', formData)
             .success(function(data) {
                 console.log(data);

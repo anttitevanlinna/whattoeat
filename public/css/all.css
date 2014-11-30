@@ -1,14 +1,11 @@
-/**
- * whattoeat
- */
 body{
-background-image: url('http://1.bp.blogspot.com/-PC_5JXttmZM/UB7Cf7fK7-I/AAAAAAAAG8o/qiu9c7U8FZA/s1600/PennePasta+%25287%2529.jpg');
-min-height: 100%;
+  background-image: url('http://1.bp.blogspot.com/-PC_5JXttmZM/UB7Cf7fK7-I/AAAAAAAAG8o/qiu9c7U8FZA/s1600/PennePasta+%25287%2529.jpg');
+  min-height: 100%;
 }
 
 .opaque{
-background: #eeeeee;
-background-color:rgba(256, 256, 256, 0.7);
+  background: #eeeeee;
+  background-color:rgba(256, 256, 256, 0.7);
 }
 
 .pad{
@@ -17,7 +14,7 @@ background-color:rgba(256, 256, 256, 0.7);
 }
 
 .btn{
-text-align: center;
+  text-align: center;
 }
 
 .wide{
@@ -26,16 +23,13 @@ text-align: center;
 }
 
 .next{
-background-color:rgba(256, 0, 0, 0.7);
+  background-color:rgba(256, 0, 0, 0.7);
 }
 
 .add{
-background-color:rgba(0, 256, 0, 0.7);
+  background-color:rgba(0, 256, 0, 0.7);
 }
   
 .navbar{
-background-color:rgba(0, 0, 0, 0.8);
+  background-color:rgba(0, 0, 0, 0.8);
 }
-
-
-

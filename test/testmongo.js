@@ -7,8 +7,7 @@ module.exports['addandremove'] = function (test) {
 
   seed('testfoods', function(){
     console.log('checking 1');
-    db.connect('testfoods'
-               , function(collection){
+    db.connect('testfoods', function(collection){
       console.log('checking 2');
       db.getfoods(collection, function(items){
         test.ok(items.length > 0);        
@@ -57,8 +56,7 @@ module.exports.testAddFind = function(test){
           test.equal(result.status, 'already_exists');
           db.close();
           test.done();
-          
-        })
+        });
       });
     });
   });
