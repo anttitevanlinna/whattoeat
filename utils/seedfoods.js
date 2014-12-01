@@ -9,7 +9,8 @@ db.collectionName = collectionName;
 db.connect( collectionName, function( foodcollection ){
   var insertlist = [];
   foodlist.forEach( function(item) {
-    insertlist.push({ name: item });
+    insertlist.push({ name: item,
+                     creator: 'nobody'});
   }); 
   
   foodcollection.insert(insertlist,

@@ -15,8 +15,7 @@ app.get('/api/randomfood', function(request, response) {
 })
 
 app.post('/api/add', function(request, response){
-  var newfood = request.body.food;
-  db.add(newfood, function(item){
+  db.add(request.body.food,request.body.user, function(item){
      console.log('addfood' + item);
      response.send(item); 
   });

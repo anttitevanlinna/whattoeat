@@ -20,12 +20,14 @@ function mainController($scope, $http, Facebook) {
   $scope.login = function () {
     Facebook.login(function(response) {
       $scope.loginStatus = response.status;
+      $scope.api();            
       console.log(response.status);
     });
   };
   
   $scope.api = function () {
     Facebook.api('/me', function(response) {
+      console.log(response);
       $scope.user = response;
     });
   };
@@ -34,6 +36,19 @@ function mainController($scope, $http, Facebook) {
     return Facebook.isReady();
   }, function(newVal) {
     if (newVal) {
+        Facebook.getLoginStatus(function(response){
+          if (response.status === 'connected') {
+            var uid = response.authResponse.userID;
+            var accessToken = response.authResponse.accessToken;
+            $scope.loginStatus ='connected';
+            $scope.api();            
+          } else if (response.status === 'not_authorized') {
+            // the user is logged in to Facebook, 
+            // but has not authenticated your app
+          } else {
+            // the user isn't logged in to Facebook.
+          }
+        });
       $scope.facebookIsReady = true;
     }
   });
@@ -41,7 +56,9 @@ function mainController($scope, $http, Facebook) {
   $scope.add = function() {
     var food = $('input[name=food]').val();
     var formData = {
-      'food' 				: food,
+      'food': food,
+      'user': $scope.user.first_name,
+      'uid': $scope.user.id
     };
     $http.post('/api/add', formData)
     .success(function(data) {
