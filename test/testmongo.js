@@ -49,10 +49,10 @@ module.exports.testAddFind = function(test){
   var db = require('../db');
   var randomname = 'string'+Date.now().toString();
   db.connect('testfoods',function(collection){
-    db.addfood(collection, randomname, function(){
-      db.getfoodbyname(collection, randomname, function(item){
+    db.addfood(collection, randomname, 'nobody', function(){
+      db.getfoodbyname(collection, randomname,  function(item){
         test.equal(item.name, randomname, 'was expecting pasta but got '+ item.name);
-        db.addfood(collection, randomname, function(result){
+        db.addfood(collection, randomname, 'nobody', function(result){
           test.equal(result.status, 'already_exists');
           db.close();
           test.done();

@@ -61,9 +61,9 @@ module.exports.random = function(callback){
   });
 }
 
-module.exports.add = function(food, callback){
+module.exports.add = function(food, creator, callback){
   module.exports.connect('foods',function(collection){
-    module.exports.addfood(collection, food, function(result){
+    module.exports.addfood(collection, food, creator, function(result){
       var oneitem = result[0];
       oneitem.status = result.status;
       console.log('add() '+oneitem);
@@ -72,11 +72,11 @@ module.exports.add = function(food, callback){
   });                    
 }
 
-module.exports.addfood = function(foodcollection, item, callback){
+module.exports.addfood = function(foodcollection, item, creator, callback){
   module.exports.getfoodbyname( foodcollection,item, function(result){
     if(result == undefined ){
       console.log('add: '+item+' doesnt exists, adding');
-      module.exports.addfoodlist(foodcollection, [item], callback);
+      module.exports.addfoodlist(foodcollection, [item], creator, callback);
     }else{
       value = [result];
       value.status = 'already_exists';
@@ -86,11 +86,14 @@ module.exports.addfood = function(foodcollection, item, callback){
   });
 }
 
-module.exports.addfoodlist = function(foodcollection, list, callback){
+module.exports.addfoodlist = function(foodcollection, list, creator2, callback){
   
   var insertlist = [];
   list.forEach( function(item) {
-    insertlist.push({ name: item });
+    insertlist.push({ 
+      name: item, 
+      creator: creator2
+    });
   }); 
 
   foodcollection.insert(insertlist, function (err, result) {
