@@ -1,5 +1,6 @@
 body{
-  background-image: url('http://1.bp.blogspot.com/-PC_5JXttmZM/UB7Cf7fK7-I/AAAAAAAAG8o/qiu9c7U8FZA/s1600/PennePasta+%25287%2529.jpg');
+  background-image: url('/img/01.jpg');
+  background-size: 100%;
   min-height: 100%;
 }
 
@@ -10,7 +11,7 @@ body{
 
 .pad{
   padding: 30px;
-  margin-top; 60px;
+  margin-top; 20px;
 }
 
 .btn{
