@@ -1,17 +1,43 @@
-body{
-  background-image: url('/img/01.jpg');
-  background-size: 100%;
-  min-height: 100%;
+html {
+ 	background:#505D6E url(/img/01.jpg) no-repeat center center fixed; 
+	min-height:100%;
+	-webkit-background-size: cover;
+	   -moz-background-size: cover;
+	     -o-background-size: cover;
+	        background-size: cover;
+}
+
+body {
+	background:transparent;
+	min-height:100%; 	
+	-webkit-font-smoothing: antialiased;
+	-webkit-overflow-scrolling: touch;
+	font-family: Helvetica, Arial, sans-serif;
+	color:#fff;
+	color:rgba(50,50,50,.8); 
+	font-weight: normal;
+}
+
+a { 
+	color:rgba(50,50,50,.8); 
+  text-decoration: none; 
+  font-weight: 700;
+  
+}
+a:hover, a:active { 
+  text-decoration: underline; 
 }
 
 .opaque{
-  background: #eeeeee;
-  background-color:rgba(256, 256, 256, 0.7);
+  background-color:rgba(256, 256, 256, 0.8);
 }
 
 .pad{
-  padding: 30px;
-  margin-top; 20px;
+  padding: 10px;
+}
+
+.topmargin{
+    margin-top: 30px;
 }
 
 .btn{
@@ -24,13 +50,16 @@ body{
 }
 
 .next{
-  background-color:rgba(256, 0, 0, 0.7);
+  background-color:rgba(255, 0, 0, 0.95);
 }
 
 .add{
-  background-color:rgba(0, 256, 0, 0.7);
+  background-color:rgba(0, 255, 0, 0.7);
+}
+
+@media (min-width: 768px) {
+.navbar-nav-heavy {
+  font-size: 24px;
+}
 }
   
-.navbar{
-  background-color:rgba(0, 0, 0, 0.8);
-}

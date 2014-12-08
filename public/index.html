@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 
+
 <script src="/js/angular-fb.js"></script>
 <script src="/js/main.js"></script>
 <link rel="stylesheet" href="/css/all.css"/>
@@ -22,23 +23,16 @@
 
 <div class="container-fluid">
   <nav id="home" class="navbar navbar-top">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">the whattoeat app</a>
-      </div>
       <div>
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav navbar-nav-heavy">
+          <li><a href="#home">The whattoeat app</a></li>
           <li><a href="#why">Why</a></li>
           <li><a href="#code">Code</a></li>
-          <li><a href="#backlog">The todo list</a></li>
+          <li><a href="#backlog">Todo list</a></li>
         </ul>
      </div>
   </nav>      
   
-  <div class="row">
-    <div class="col-xs-12"> 
-      <br/>  
-    </div>
-  </div>
   <div class="row pad">
     <div class="col-xs-12 opaque">
        <h1 class="text-center">How about having some <span ng-bind="currentfood.name">...food</span>
@@ -50,7 +44,7 @@
        </h1>
     </div>
   </div>
-  <div class="row">
+  <div class="row topmargin">
     <div class="col-sm-6 column">
       <div class="next btn wide" ng-click="next()">
         <form>
@@ -68,7 +62,7 @@
             <label ng-show="loginStatus != 'connected'">Don't see your favorite? Add it here</label>
             <label ng-show="loginStatus == 'connected'">
               <span ng-bind="user.first_name"></span>, 
-              your food will be credited to your name
+              your food will be credited to you
             </label>
             <input type="text" name="food" class="form-control" placeholder="Mac and Cheese">
         </div>
