@@ -1,7 +1,30 @@
-var foods = angular.module('foods', ['facebook']).config(
-  function(FacebookProvider) {
-    FacebookProvider.init('785659141493231');
-  });
+
+var foods = angular.module('foods', ['facebook','ngRoute'])
+foods.config(
+  ['FacebookProvider','$routeProvider', 
+    function(FacebookProvider, $routeProvider) { // , FacebookProvider
+      FacebookProvider.init('785659141493231');
+      $routeProvider.when('/food', {
+                templateUrl : 'food.html',
+                controller  : 'foodController'
+            });
+      $routeProvider.when('/why', {
+                templateUrl : 'why.html',
+                controller  : 'mainController'
+            });
+      $routeProvider.when('/code', {
+                templateUrl : 'code.html',
+                controller  : 'mainController'
+            });
+      $routeProvider.otherwise( {
+                templateUrl : 'yesno.html',
+                controller  : 'foodController'
+            });
+   }])
+
+function foodController($scope, $http, Facebook) {
+
+}
 
 function mainController($scope, $http, Facebook) {
 
@@ -83,3 +106,5 @@ function mainController($scope, $http, Facebook) {
     });
   };
 }
+
+

@@ -1,0 +1,19 @@
+<div class="row pad">
+  <div class="col-xs-12 opaque">
+    <h1 class="text-center">Ok, let's have some <span ng-bind="currentfood.name">...food</span>
+      <small>
+        <span ng-hide="currentfood.creator == undefined">
+          (Added by <span ng-bind="currentfood.creator"></span>)
+        </span>
+      </small>
+    </h1>
+  </div>
+</div>
+
+<div class="row pad">
+  <div class="col-xs-12 opaque">
+    <a href="#" type="submit" class="btn btn-success btn-lg btn-block">
+      Back
+    </a>
+  </div>
+</div>
