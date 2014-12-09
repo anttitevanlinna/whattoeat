@@ -57,6 +57,19 @@ a:hover, a:active {
   background-color:rgba(0, 255, 0, 0.7);
 }
 
+.reveal-animation.ng-enter {
+  -webkit-animation: enter_sequence 0.3s linear; /* Safari/Chrome */
+  animation: enter_sequence 0.3s linear; /* IE10+ and Future Browsers */
+}
+@-webkit-keyframes enter_sequence {
+  from { opacity:0.6; }
+  to { opacity:1; }
+}
+@keyframes enter_sequence {
+  from { opacity:0.6; }
+  to { opacity:1; }
+}
+
 @media (min-width: 768px) {
 .navbar-nav-heavy {
   font-size: 24px;

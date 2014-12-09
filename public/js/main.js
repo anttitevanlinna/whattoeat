@@ -1,5 +1,5 @@
 
-var foods = angular.module('foods', ['facebook','ngRoute'])
+var foods = angular.module('foods', ['facebook','ngRoute','ngAnimate'])
 foods.config(
   ['FacebookProvider','$routeProvider', 
     function(FacebookProvider, $routeProvider) { // , FacebookProvider
