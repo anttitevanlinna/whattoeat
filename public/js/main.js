@@ -1,9 +1,13 @@
 
 var foods = angular.module('foods', ['facebook','ngRoute','ngAnimate'])
+var fbProvider;
+
 foods.config(
-  ['FacebookProvider','$routeProvider', 
-    function(FacebookProvider, $routeProvider) { // , FacebookProvider
-      FacebookProvider.init('785659141493231');
+  ['FacebookProvider','$routeProvider','$httpProvider', 
+    function(FacebookProvider, $routeProvider, $http) {
+
+      fbProvider = FacebookProvider;
+
       $routeProvider.when('/food', {
                 templateUrl : 'food.html',
                 controller  : 'foodController'
@@ -21,6 +25,15 @@ foods.config(
                 controller  : 'foodController'
             });
    }])
+
+foods.run(["$http", function($http) {
+  $http.get('/api/fbconfig/').success(function(data) {
+    console.log('initing FB with '+data);
+    fbProvider.init(data);
+  }).error(function(data) {
+    console.log('Error: ' + data);
+  });
+}]);
 
 function foodController($scope, $http, Facebook) {
 

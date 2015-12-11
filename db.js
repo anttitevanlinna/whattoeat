@@ -1,7 +1,6 @@
-  var mongodb = require('mongodb');
-  var uri = 'mongodb://heroku_app31811253:g4s8gcd4h69dtde70iqof74p7b@ds051990.mongolab.com:51990/heroku_app31811253';
+var mongodb = require('mongodb');
+var uri = 'mongodb://simpleton:simpleton1@ds051990.mongolab.com:51990/heroku_app31811253';
 var mdb = null;
-var foodcollection;
 
 // calls back when connection is there, with the collection
 module.exports.connect = function( collectionName, callback ){

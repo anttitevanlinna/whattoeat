@@ -8,11 +8,15 @@ app.use(express.static(__dirname + '/public'))
 app.use(bodyParser.json());      
 app.use(bodyParser.urlencoded({extended: true})); 
 
+app.get('/api/fbconfig/', function(request, response) {
+  response.send(String(app.get('port') == 8080?508881345922543:785659141493231));
+});	  
+     
 app.get('/api/randomfood', function(request, response) {
   db.random(function(item){
       response.send(item); 
   });
-})
+});
 
 app.post('/api/add', function(request, response){
   db.add(request.body.food,request.body.user, function(item){
