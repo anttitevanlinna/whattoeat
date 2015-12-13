@@ -52,8 +52,10 @@ function mainController($scope, $http, Facebook) {
   $scope.facebookIsReady = false;
   $scope.user = null;
   
-  
   $scope.login = function () {
+
+    ga('send', 'event', 'foods', 'login');
+
     Facebook.login(function(response) {
       $scope.loginStatus = response.status;
       $scope.api();            
@@ -90,6 +92,9 @@ function mainController($scope, $http, Facebook) {
   });
 
   $scope.add = function() {
+
+    ga('send', 'event', 'foods', 'add');
+
     var food = $('input[name=food]').val();
     var formData = {
       'food': food,
@@ -110,6 +115,9 @@ function mainController($scope, $http, Facebook) {
   };
 
   $scope.next = function() {
+
+    ga('send', 'event', 'foods', 'next');
+
     $http.get('/api/randomfood', $scope.formData)
     .success(function(data) {
       $scope.currentfood = data;
