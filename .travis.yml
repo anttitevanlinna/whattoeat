@@ -5,6 +5,7 @@ before_install:
   - npm install nodeunit
 script: nodeunit test
 deploy:
-  provider: heroku
-  api_key: "a9a9495a-af40-48dc-bafd-823a5c933cad"
-  app: shrouded-shore-2820
+  provider: opsworks
+  access-key-id: AKIAJSW4BH2YECIJGD7Q
+  secret-access-key: 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
+  app-id: ec7381cd-f4e3-4f26-aa97-34be0c26bdc3
