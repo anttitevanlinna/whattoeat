@@ -9,5 +9,5 @@ deploy:
   provider: opsworks
   access-key-id: AKIAJHZZDBOAUR3YMQIA
   secret-access-key:
-    secure: S+hgnQ3oKFPETpOUhaQ9RqxzXp5TvP7NJgEPNDdVKNNgz8GESR6b7GmMeb498pQlOxUusWVt7Q3NzBI3eNP2pxZ3a7y7cQHqjMMEoYR/U3Rl2k5sMYsJRL+A/AF5DZBcPyQf4nhT9ACEMkblysAZ3NBi6OhnBKaOePzYmlYvcss=
+    secure: TiDkqE95K3HzpnERex7XnefTuXCa+pfQUf0CQ6hddhKe36nAFmM462MDGjXTYzd5DmGvLfi3ayBzkOpwbEOjuPU6q5xrxxsIYk8Vh8tD8QcTB+6P5W5SpNYBs0DaWDu/eiQyktCbjFL1sRt65HqXUSkE5Z9jACTP4oYudNhg0Oc=
   app-id: 3534e70b-96bb-4e68-8cb8-65ef84985080
