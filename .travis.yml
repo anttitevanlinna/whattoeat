@@ -1,12 +1,13 @@
 sudo: false
 language: node_js
 node_js:
-   - "0.10"
+- '0.10'
 before_install:
-  - npm install nodeunit
+- npm install nodeunit
 script: nodeunit test
 deploy:
   provider: opsworks
   access-key-id: AKIAJHZZDBOAUR3YMQIA
-  secure: "M8RxiZzRIYlYv/i6eCzK04LcB1W1RXrc3AFhgzdD+/mMpun7QVHMkXbVJFQcr8SWAS3XDH6oheda6w+f/m7GscTDJEAHzpG+gKbi4vgcqTuiv3Yhm/3ya3Mlngf5eXm74x0xkeNnCekS/79A1HbZpjMMxDA1bzqvPFpFa0+I05E="
+  secret-access-key:
+    secure: S+hgnQ3oKFPETpOUhaQ9RqxzXp5TvP7NJgEPNDdVKNNgz8GESR6b7GmMeb498pQlOxUusWVt7Q3NzBI3eNP2pxZ3a7y7cQHqjMMEoYR/U3Rl2k5sMYsJRL+A/AF5DZBcPyQf4nhT9ACEMkblysAZ3NBi6OhnBKaOePzYmlYvcss=
   app-id: 3534e70b-96bb-4e68-8cb8-65ef84985080
