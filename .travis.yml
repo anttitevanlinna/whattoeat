@@ -7,6 +7,6 @@ before_install:
 script: nodeunit test
 deploy:
   provider: opsworks
-  access-key-id: AKIAJSW4BH2YECIJGD7Q
-  secret-access-key: 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
+  access-key-id: AKIAJHZZDBOAUR3YMQIA
+  secure: "M8RxiZzRIYlYv/i6eCzK04LcB1W1RXrc3AFhgzdD+/mMpun7QVHMkXbVJFQcr8SWAS3XDH6oheda6w+f/m7GscTDJEAHzpG+gKbi4vgcqTuiv3Yhm/3ya3Mlngf5eXm74x0xkeNnCekS/79A1HbZpjMMxDA1bzqvPFpFa0+I05E="
   app-id: 3534e70b-96bb-4e68-8cb8-65ef84985080
