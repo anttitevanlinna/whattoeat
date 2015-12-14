@@ -10,52 +10,49 @@
   </div>
 </div>
 
-  <div class="row topmargin">
-    <div class="col-sm-6 column">
-      <div class="next btn wide" ng-click="next()">
-        <form>
-          <label>Don't like it?</label>
+<div class="row topmargin">
+  <div class="col-sm-6 column">
+    <div class="next btn wide" ng-click="next()">
+      <form>
+        <label>Don't like it?</label>
         <button type="submit" class="btn btn-success btn-lg btn-block">
            Next...
         </button>
-        </form>
-      </div>
-    </div>
-    <div class="col-sm-6 column"> 
-      <div class="add btn wide">
-        <form>
-          <label>Sounds good</label>
-          <a href="#food" type="submit" class="btn btn-success btn-lg btn-block">
-            I'll have it
-          </a>
-        </form>
-      </div>
+      </form>
     </div>
   </div>
-
-
-
-  <div class="row">
-    <div class="col-xs-12">
-        <div class="opaque pad wide">
-        <form>
-          <div id="food-group" class="form-group">
-            <label ng-show="loginStatus != 'connected'">Don't see your favorite? Add it here</label>
-            <label ng-show="loginStatus == 'connected'">
-              <span ng-bind="user.first_name"></span>, 
-              your food will be credited to you
-            </label>
-            <input type="text" name="food" class="form-control" placeholder="Mac and Cheese">
-        </div>
-  
-          <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="login()" ng-hide="loginStatus == 'connected'">
-            Login with Facebook first
-        </button>
-        <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="add()" ng-show="loginStatus == 'connected'">
-           Add
-        </button>
-        </form>
-      </div>
+  <div class="col-sm-6 column"> 
+    <div class="add btn wide">
+      <form>
+        <label>Sounds good</label>
+        <a href="#food" type="submit" class="btn btn-success btn-lg btn-block">
+          I'll have it
+        </a>
+      </form>
     </div>
   </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+      <div class="opaque pad wide">
+      <form>
+        <div id="food-group" class="form-group">
+          <label ng-show="loginStatus != 'connected'">Don't see your favorite? Add it here</label>
+          <label ng-show="loginStatus == 'connected'">
+            <span ng-bind="user.first_name"></span>, 
+            your food will be credited to you
+          </label>
+          <input type="text" name="food" class="form-control" placeholder="Mac and Cheese">
+      </div>
+      <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="login()" ng-hide="loginStatus == 'connected'">
+        Login with Facebook first
+      </button>
+      <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="add()" ng-show="loginStatus == 'connected'">
+         Add
+      </button>
+      </form>
+    </div>
+  </div>
+</div>
 
