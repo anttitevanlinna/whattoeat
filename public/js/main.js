@@ -48,16 +48,11 @@ function mainController($scope, $http, Facebook) {
   });
 
   $scope.formData = {};
-  $scope.loginStatus = 'disconnected';
-  $scope.facebookIsReady = false;
-  $scope.user = null;
-  
-  $scope.login = function () {
 
+  $scope.login = function () {
     ga('send', 'event', 'foods', 'login');
 
     Facebook.login(function(response) {
-      $scope.loginStatus = response.status;
       $scope.api();            
       console.log(response.status);
     });
@@ -77,8 +72,7 @@ function mainController($scope, $http, Facebook) {
         Facebook.getLoginStatus(function(response){
           if (response.status === 'connected') {
             var uid = response.authResponse.userID;
-            var accessToken = response.authResponse.accessToken;
-            $scope.loginStatus ='connected';
+            $scope.accessToken = response.authResponse.accessToken;
             $scope.api();            
           } else if (response.status === 'not_authorized') {
             // the user is logged in to Facebook, 
@@ -87,7 +81,6 @@ function mainController($scope, $http, Facebook) {
             // the user isn't logged in to Facebook.
           }
         });
-      $scope.facebookIsReady = true;
     }
   });
 
@@ -98,18 +91,15 @@ function mainController($scope, $http, Facebook) {
     var food = $('input[name=food]').val();
     var formData = {
       'food': food,
-      'user': $scope.user.first_name,
-      'uid': $scope.user.id
+      'accessToken': $scope.accessToken
     };
-    $http.post('/api/add', formData)
-    .success(function(data) {
+    $http.post('/api/add', formData).success(function(data) {
       console.log(data);
       if( data.status == 'already_exists' ){
         data.name = data.name + ' (we got that already)';
       }
       $scope.currentfood = data;
-    })
-    .error(function(data) {
+    }).error(function(data) {
       console.log('Error: ' + data);
     });
   };
@@ -118,13 +108,21 @@ function mainController($scope, $http, Facebook) {
 
     ga('send', 'event', 'foods', 'next');
 
-    $http.get('/api/randomfood', $scope.formData)
-    .success(function(data) {
-      $scope.currentfood = data;
-    })
-    .error(function(data) {
-      console.log('Error: ' + data);
-    });
+    console.log('Next '+$scope.limit);
+
+    var apiUrl = '/api/randomfood';
+    if( $scope.user && $scope.limit ){
+      console.log('Current user '+$scope.user.id)
+      apiUrl = apiUrl + '?accessToken='+$scope.accessToken;
+    }
+
+    $http.get(apiUrl, $scope.formData)
+      .success(function(data) {
+        $scope.currentfood = data;
+      })
+      .error(function(data) {
+        console.log('Error: ' + data);
+      });
   };
 }
 

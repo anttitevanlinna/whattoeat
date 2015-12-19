@@ -10,7 +10,8 @@ db.connect( collectionName, function( foodcollection ){
   var insertlist = [];
   foodlist.forEach( function(item) {
     insertlist.push({ name: item,
-                     creator: 'nobody'});
+                     creator: 'nobody',
+                     creatorId: '11'});
   }); 
   
   foodcollection.insert(insertlist,
@@ -30,9 +31,6 @@ db.connect( collectionName, function( foodcollection ){
 
 }
 
-
-
 module.exports.isvalid = function(string){
   return 3 < string.length;
 }
-

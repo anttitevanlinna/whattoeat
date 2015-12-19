@@ -1,5 +1,6 @@
 var express = require('express');
 var db = require('./db');
+var fb = require('./fb');
 var app = express();
 var bodyParser = require('body-parser')
 
@@ -13,15 +14,34 @@ app.get('/api/fbconfig/', function(request, response) {
 });	  
      
 app.get('/api/randomfood', function(request, response) {
-  db.random(function(item){
-      response.send(item); 
-  });
+
+  console.log('random ' + request.query.accessToken);
+  if(request.query.accessToken){
+  	fb.me(request.query.accessToken, function(user){
+		db.random(user.id, function(item){
+      		response.send(item); 
+  		});
+	});
+  }else{
+	db.random(null, function(item){
+  		response.send(item); 
+	});  	
+  }
 });
 
 app.post('/api/add', function(request, response){
-  db.add(request.body.food,request.body.user, function(item){
-     console.log('addfood' + item);
-     response.send(item); 
+
+  console.log('add ' + request.body.accessToken);
+
+  fb.me(request.body.accessToken, function(user){
+  	if(user.id){
+	  db.add(request.body.food, user, function(item){
+	     console.log('addfood' + item);
+	     response.send(item); 
+	  });
+  	}else{
+  		response.send('{error}');
+  	}
   });
 });
 

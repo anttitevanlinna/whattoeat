@@ -14,7 +14,7 @@ module.exports.connect = function( collectionName, callback ){
 
       foodcollection = db.collection(collectionName);
       mdb = db;
-      console.log('db init done, doing callback '+foodcollection);
+      console.log('db init done');
       callback( foodcollection );
     });
   }else{
@@ -23,13 +23,21 @@ module.exports.connect = function( collectionName, callback ){
 }
 
   // calls back with the items 
-module.exports.getfoods = function(foodcollection, callback){
-  foodcollection.find().toArray( function(err, items){
+module.exports.getfoods = function(foodcollection, creatorId, callback){
+  handler = function(err, items){
     if(err){
       console.log(err);
     }
+    console.log('found foods for '+creatorId);
     callback(items);
-  });
+  }
+  if( creatorId ){
+    console.log('finding foods for '+creatorId);
+    foodcollection.find({ 'creatorId': creatorId }).toArray(handler);
+  }else{
+    console.log('finding all foods');
+    foodcollection.find().toArray(handler);
+  }
 };
 
 module.exports.getfoodbyname = function( foodcollection, name, callback){
@@ -50,9 +58,9 @@ module.exports.getfoodbyname = function( foodcollection, name, callback){
  }
  
  // calls back with the chosen food
-module.exports.random = function(callback){
+module.exports.random = function(creatorId, callback){
   module.exports.connect('foods',function(collection){
-     module.exports.getfoods(collection, function(foods){
+     module.exports.getfoods(collection, creatorId, function(foods){
        value = foods[Math.floor(Math.random()*foods.length)];
        value.status = 'ok';
        callback( value );
@@ -74,7 +82,7 @@ module.exports.add = function(food, creator, callback){
 module.exports.addfood = function(foodcollection, item, creator, callback){
   module.exports.getfoodbyname( foodcollection,item, function(result){
     if(result == undefined ){
-      console.log('add: '+item+' doesnt exists, adding');
+      console.log('add: '+JSON.stringify(item)+' doesnt exists, adding');
       module.exports.addfoodlist(foodcollection, [item], creator, callback);
     }else{
       value = [result];
@@ -91,7 +99,8 @@ module.exports.addfoodlist = function(foodcollection, list, creator2, callback){
   list.forEach( function(item) {
     insertlist.push({ 
       name: item, 
-      creator: creator2
+      creator: creator2.first_name,
+      creatorId: creator2.id
     });
   }); 
 

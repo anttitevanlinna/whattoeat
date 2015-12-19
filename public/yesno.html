@@ -7,6 +7,13 @@
         </span>
       </small>
     </h1>
+    <div class="panel panel-default" ng-show="user">
+      <div class="panel-body">
+        <input type="checkbox" ng-model="$parent.limit"/>
+        <span ng-show="limit">Limiting to the foods you've added</span>
+        <span ng-hide="limit">You can limit suggestions to the the ones you've added</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -38,17 +45,17 @@
       <div class="opaque pad wide">
       <form>
         <div id="food-group" class="form-group">
-          <label ng-show="loginStatus != 'connected'">Don't see your favorite? Add it here</label>
-          <label ng-show="loginStatus == 'connected'">
+          <label ng-hide="user">Don't see your favorite? Add it here</label>
+          <label ng-show="user">
             <span ng-bind="user.first_name"></span>, 
             your food will be credited to you
           </label>
           <input type="text" name="food" class="form-control" placeholder="Mac and Cheese">
       </div>
-      <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="login()" ng-hide="loginStatus == 'connected'">
+      <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="login()" ng-hide="user">
         Login with Facebook first
       </button>
-      <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="add()" ng-show="loginStatus == 'connected'">
+      <button type="submit" class="btn btn-success btn-lg btn-block" ng-click="add()" ng-show="user">
          Add
       </button>
       </form>

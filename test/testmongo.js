@@ -6,18 +6,12 @@ module.exports['addandremove'] = function (test) {
   var seed = require('../utils/seedfoods');
 
   seed('testfoods', function(){
-    console.log('checking 1');
     db.connect('testfoods', function(collection){
-      console.log('checking 2');
-      db.getfoods(collection, function(items){
+      db.getfoods(collection, null, function(items){
         test.ok(items.length > 0);        
-        console.log('checking 3');
         db.close();
-        console.log('checking 4');
         test.done();
       });
-      console.log('checking 5');
-      
     });
   });
   
@@ -49,10 +43,10 @@ module.exports.testAddFind = function(test){
   var db = require('../db');
   var randomname = 'string'+Date.now().toString();
   db.connect('testfoods',function(collection){
-    db.addfood(collection, randomname, 'nobody', function(){
-      db.getfoodbyname(collection, randomname,  function(item){
+    db.addfood(collection, randomname, {}, function(){
+      db.getfoodbyname(collection, randomname, function(item){
         test.equal(item.name, randomname, 'was expecting pasta but got '+ item.name);
-        db.addfood(collection, randomname, 'nobody', function(result){
+        db.addfood(collection, randomname, {}, function(result){
           test.equal(result.status, 'already_exists');
           db.close();
           test.done();
@@ -60,5 +54,21 @@ module.exports.testAddFind = function(test){
       });
     });
   });
-    
 }
+
+module.exports.testAddFindByCreator = function(test){
+
+  test.expect(1);
+
+  var db = require('../db');
+  var randomname = 'string'+Date.now().toString();
+  db.connect('testfoods', function(collection){
+    db.addfood(collection, randomname, {name:'nobody', id: randomname}, function(){
+      db.getfoods(collection, randomname, function(item){
+        test.equal(item[0].name, randomname, 'was expecting the random name but got '+ item[0].name);
+        db.close();
+        test.done();
+      });
+    });
+  });
+};
