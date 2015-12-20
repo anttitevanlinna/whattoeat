@@ -1,21 +1,24 @@
 var mongodb = require('mongodb');
-var logger = require('./logger').logger();
 var uri = 'mongodb://simpleton:simpleton1@ds051990.mongolab.com:51990/heroku_app31811253';
 var mdb = null;
 
-// calls back when connection is there, with the collection
+module.exports.log = require('./logger').logger();
+
+// calls back when connection is loaded, with the collection
 module.exports.connect = function( collectionName, callback ){
   if (mdb === null) {    
-    logger.info('connection to '+ collectionName);
+    module.exports.log.info('connection to '+ collectionName);
+    console.log(module.exports.log.type);
+
     mongodb.MongoClient.connect(uri, function(err, db) {
 
       if( err ){
-        logger.info(err)
+        module.exports.log.info(err)
       }
 
       foodcollection = db.collection(collectionName);
       mdb = db;
-      logger.info('db init done');
+      module.exports.log.info('db init done');
       callback( foodcollection );
     });
   }else{
@@ -27,16 +30,16 @@ module.exports.connect = function( collectionName, callback ){
 module.exports.getfoods = function(foodcollection, creatorId, callback){
   handler = function(err, items){
     if(err){
-      logger.info(err);
+      module.exports.log.info(err);
     }
-    logger.info('found foods for '+creatorId);
+    module.exports.log.info('found foods for '+creatorId);
     callback(items);
   }
   if( creatorId ){
-    logger.info('finding foods for '+creatorId);
+    module.exports.log.info('finding foods for '+creatorId);
     foodcollection.find({ 'creatorId': creatorId }).toArray(handler);
   }else{
-    logger.info('finding all foods');
+    module.exports.log.info('finding all foods');
     foodcollection.find().toArray(handler);
   }
 };
@@ -45,7 +48,7 @@ module.exports.getfoodbyname = function( foodcollection, name, callback){
   var query = {name: name};
   foodcollection.findOne(query, function(err, item){
     if(err){
-      logger.info('error in getfoodbyname' + err);
+      module.exports.log.info('error in getfoodbyname' + err);
     }
 
     if( item == undefined){
@@ -53,7 +56,7 @@ module.exports.getfoodbyname = function( foodcollection, name, callback){
       item.status = 'ok';         
     }
 
-    logger.info('find done for '+name +' got '+item);
+    module.exports.log.info('find done for '+name +' got '+item);
     callback(item);
   }); 
  }
@@ -64,7 +67,7 @@ module.exports.random = function(creatorId, callback){
      module.exports.getfoods(collection, creatorId, function(foods){
 
         var position = Math.floor(Math.random()*foods.length);
-        logger.info('randomizing selection of foods, count '+foods.length+' position, '+position);
+        module.exports.log.info('randomizing selection of foods, count '+foods.length+' position, '+position);
 
         value = foods[position];
         value.status = 'ok';
@@ -78,7 +81,7 @@ module.exports.add = function(food, creator, callback){
     module.exports.addfood(collection, food, creator, function(result){
       var oneitem = result[0];
       oneitem.status = result.status;
-      logger.info('add() '+oneitem);
+      module.exports.log.info('add() '+oneitem);
       callback(oneitem);
     });
   });                    
@@ -87,12 +90,12 @@ module.exports.add = function(food, creator, callback){
 module.exports.addfood = function(foodcollection, item, creator, callback){
   module.exports.getfoodbyname( foodcollection,item, function(result){
     if(result == undefined ){
-      logger.info('add: '+JSON.stringify(item)+' doesnt exists, adding');
+      module.exports.log.info('add: '+JSON.stringify(item)+' doesnt exists, adding');
       module.exports.addfoodlist(foodcollection, [item], creator, callback);
     }else{
       value = [result];
       value.status = 'already_exists';
-      logger.info('add: '+item+' existed, skipping add '+value);
+      module.exports.log.info('add: '+item+' existed, skipping add '+value);
       callback(value);
     }
   });
@@ -111,18 +114,18 @@ module.exports.addfoodlist = function(foodcollection, list, creator2, callback){
 
   foodcollection.insert(insertlist, function (err, result) {
     if(err) {
-      logger.info(err);
+      module.exports.log.info(err);
       callback(err); 
     }
 
-    logger.info('insert done '+result);
+    module.exports.log.info('insert done '+result);
     result.status = 'ok';
     callback(result);
   });
 }
   
 module.exports.close = function(){
-  logger.info('db closing...');
+  module.exports.log.info('db closing...');
   mdb.close(function (err) {
     mdb = null;
     if(err) throw err;
