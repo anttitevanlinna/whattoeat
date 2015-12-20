@@ -100,6 +100,14 @@ function mainController($scope, $http, Facebook) {
     }
   });
 
+  $scope.$watch("limit", function(newVal) {
+    if (newVal) {
+      console.log('limiting, doing next');
+      $scope.next();
+    }
+  });
+
+
   $scope.add = function() {
 
     ga('send', 'event', 'foods', 'add');
