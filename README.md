@@ -8,18 +8,13 @@ anttitevanlinna (find me on twitter, if needed)
 
 ## Running Locally
 
-node index.js
-
+node server.js
 
 Your app should now be running on [localhost:8080](http://localhost:8080/).
 
-## Deploying to Heroku
+## Deploying to AWS with Opsworks
 
-```
-$ heroku create
-$ git push heroku master
-$ heroku open
-```
+This app is compatible with AWS opsworks, simply add it to your stack. 
 
 ## Travis CI
 
