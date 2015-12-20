@@ -18,5 +18,21 @@ module.exports.logger = function(){
   logger.add(require('winston-cloudwatch'), awsoptions);
 
   logger.level = 'debug';
+  logger.exitOnError = false;
+  logger.type = 'aws';
+  return logger;
+}
+
+module.exports.console = function(){
+  var winston = require('winston');
+  var logger = new (winston.Logger)({
+    transports: [
+      new winston.transports.Console(),
+    ]
+  });
+
+  logger.type = 'console';
+  logger.exitOnError = false;
+  logger.level = 'debug';
   return logger;
 }

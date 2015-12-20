@@ -1,8 +1,15 @@
+var getDb = function(){
+  var db = require('../db');
+  db.log = require('../logger').console();
+  return db;
+}
+
+
 module.exports['addandremove'] = function (test) {
   
   test.expect(1);
   
-  var db = require('../db');
+  var db = getDb();
   var seed = require('../utils/seedfoods');
 
   seed('testfoods', function(){
@@ -20,7 +27,7 @@ module.exports['addandremove'] = function (test) {
 module.exports['findafood'] = function (test) {
   test.expect(2);
   
-  var db = require('../db');
+  var db = getDb();
   var seed = require('../utils/seedfoods');
   seed('testfoods', function(){
     db.connect('testfoods',function(collection){
@@ -40,7 +47,7 @@ module.exports.testAddFind = function(test){
 
   test.expect(2);
 
-  var db = require('../db');
+  var db = getDb();
   var randomname = 'string'+Date.now().toString();
   db.connect('testfoods',function(collection){
     db.addfood(collection, randomname, {}, function(){
@@ -60,7 +67,7 @@ module.exports.testAddFindByCreator = function(test){
 
   test.expect(1);
 
-  var db = require('../db');
+  var db = getDb();
   var randomname = 'string'+Date.now().toString();
   db.connect('testfoods', function(collection){
     db.addfood(collection, randomname, {name:'nobody', id: randomname}, function(){
