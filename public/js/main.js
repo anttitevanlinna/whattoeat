@@ -26,7 +26,7 @@ foods.config(
             });
    }])
 
-foods.run(["$http", function($http) {
+foods.run(['$http', function($http) {
   $http.get('/api/fbconfig/').success(function(data) {
     console.log('initing FB with '+data);
     fbProvider.init(data);
@@ -46,8 +46,22 @@ function mainController($scope, $http, Facebook) {
   }).error(function(data) {
     console.log('Error: ' + data);
   });
-
   $scope.formData = {};
+
+  $scope.updateCount = function(){
+    if($scope.accessToken){
+      $http.get('api/count'+'?accessToken='+$scope.accessToken)
+        .success(function(data) {
+          $scope.count = data;
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        });      
+    }else{
+      $scope.count = 0;      
+    }
+  }
+
 
   $scope.login = function () {
     ga('send', 'event', 'foods', 'login');
@@ -64,6 +78,7 @@ function mainController($scope, $http, Facebook) {
       $scope.user = response;
     });
   };
+
   
   $scope.$watch(function() {
     return Facebook.isReady();
@@ -73,7 +88,8 @@ function mainController($scope, $http, Facebook) {
           if (response.status === 'connected') {
             var uid = response.authResponse.userID;
             $scope.accessToken = response.authResponse.accessToken;
-            $scope.api();            
+            $scope.api();        
+            $scope.updateCount();    
           } else if (response.status === 'not_authorized') {
             // the user is logged in to Facebook, 
             // but has not authenticated your app

@@ -5,10 +5,9 @@ var mdb = null;
 module.exports.log = require('./logger').logger();
 
 // calls back when connection is loaded, with the collection
-module.exports.connect = function( collectionName, callback ){
+module.exports.connect = function(collectionName, callback){
   if (mdb === null) {    
     module.exports.log.info('connection to '+ collectionName);
-    console.log(module.exports.log.type);
 
     mongodb.MongoClient.connect(uri, function(err, db) {
 
@@ -19,14 +18,14 @@ module.exports.connect = function( collectionName, callback ){
       foodcollection = db.collection(collectionName);
       mdb = db;
       module.exports.log.info('db init done');
-      callback( foodcollection );
+      callback(foodcollection);
     });
   }else{
-    callback( foodcollection );
+    callback(foodcollection);
   }
 }
 
-  // calls back with the items 
+// calls back with the items 
 module.exports.getfoods = function(foodcollection, creatorId, callback){
   handler = function(err, items){
     if(err){
@@ -42,6 +41,24 @@ module.exports.getfoods = function(foodcollection, creatorId, callback){
     module.exports.log.info('finding all foods');
     foodcollection.find().toArray(handler);
   }
+};
+
+module.exports.countfoods = function(creatorId, callback){
+  module.exports.connect('foods',function(collection){
+    module.exports.count(collection, creatorId, callback);
+  });
+}
+
+module.exports.count = function(foodcollection, creatorId, callback){
+  handler = function(err, items){
+    if(err){
+      module.exports.log.info(err);
+    }
+    module.exports.log.info('counted foods for '+creatorId+': '+items);
+    callback(items);
+  }
+  module.exports.log.info('counting foods for '+creatorId);
+  foodcollection.count({ 'creatorId': creatorId }, handler);
 };
 
 module.exports.getfoodbyname = function( foodcollection, name, callback){

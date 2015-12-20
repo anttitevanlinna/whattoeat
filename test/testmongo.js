@@ -63,9 +63,9 @@ module.exports.testAddFind = function(test){
   });
 }
 
-module.exports.testAddFindByCreator = function(test){
+module.exports.testAddFindByCreatorAndCountByCreator = function(test){
 
-  test.expect(1);
+  test.expect(2);
 
   var db = getDb();
   var randomname = 'string'+Date.now().toString();
@@ -73,8 +73,11 @@ module.exports.testAddFindByCreator = function(test){
     db.addfood(collection, randomname, {name:'nobody', id: randomname}, function(){
       db.getfoods(collection, randomname, function(item){
         test.equal(item[0].name, randomname, 'was expecting the random name but got '+ item[0].name);
-        db.close();
-        test.done();
+        db.count(collection, randomname, function(count){
+          test.equal(1, count, 'was expecting to count 1 '+ count);
+          db.close();
+          test.done();
+        });
       });
     });
   });

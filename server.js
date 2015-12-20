@@ -16,7 +16,6 @@ app.get('/api/fbconfig/', function(request, response) {
 });	  
      
 app.get('/api/randomfood', function(request, response) {
-
   logger.info('random');
   if(request.query.accessToken){
   	fb.me(request.query.accessToken, function(user){
@@ -31,9 +30,22 @@ app.get('/api/randomfood', function(request, response) {
   }
 });
 
+app.get('/api/count', function(request, response) {
+  logger.info('count');
+  if(request.query.accessToken){
+  	fb.me(request.query.accessToken, function(user){
+		logger.info('calling db for count: '+user.id);
+		db.countfoods(user.id, function(item){
+			logger.info('counted: '+item);
+      		response.send(String(item)); 
+  		});
+	});
+  }else{
+	response.send('{error}'); 
+  }
+});
+
 app.post('/api/add', function(request, response){
-
-
   fb.me(request.body.accessToken, function(user){
 	logger.info('add given access token with prefix ' + request.body.accessToken.substring(0,4));
   	if(user.id){
