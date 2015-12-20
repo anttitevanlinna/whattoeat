@@ -1,3 +1,5 @@
+var logger = require('./logger').logger();
+
 responseHandler = function(callback){
 	return function(res) {
 	  	res.setEncoding('utf8');
@@ -6,7 +8,7 @@ responseHandler = function(callback){
 	        body += d;
 	    });
 	    res.on('end', function() {
-	        console.log('Calling back from server response with '+body);	
+	        logger.info('Calling back from server response with '+body);	
 	        callback(JSON.parse(body));
 	    });
 	}
@@ -14,7 +16,8 @@ responseHandler = function(callback){
 
 module.exports.me = function(accessToken, callback){
 
-	var me = 'https://graph.facebook.com/v2.0/me?access_token='+accessToken;
+    logger.info('Executing FB me with token with prefix '+accessToken.substring(0,4));	
 
+	var me = 'https://graph.facebook.com/v2.0/me?access_token='+accessToken;
 	require('https').get(me, responseHandler(callback));
 }

@@ -1,6 +1,8 @@
 var express = require('express');
 var db = require('./db');
 var fb = require('./fb');
+var logger = require('./logger').logger();
+
 var app = express();
 var bodyParser = require('body-parser')
 
@@ -15,7 +17,7 @@ app.get('/api/fbconfig/', function(request, response) {
      
 app.get('/api/randomfood', function(request, response) {
 
-  console.log('random ' + request.query.accessToken);
+  logger.info('random');
   if(request.query.accessToken){
   	fb.me(request.query.accessToken, function(user){
 		db.random(user.id, function(item){
@@ -31,12 +33,12 @@ app.get('/api/randomfood', function(request, response) {
 
 app.post('/api/add', function(request, response){
 
-  console.log('add ' + request.body.accessToken);
 
   fb.me(request.body.accessToken, function(user){
+	logger.info('add given access token with prefix ' + request.body.accessToken.substring(0,4));
   	if(user.id){
 	  db.add(request.body.food, user, function(item){
-	     console.log('addfood' + item);
+	     logger.info('addfood' + item);
 	     response.send(item); 
 	  });
   	}else{
@@ -46,5 +48,5 @@ app.post('/api/add', function(request, response){
 });
 
 app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
+  logger.info("Node app is running at localhost:" + app.get('port'))
 })
