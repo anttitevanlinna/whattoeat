@@ -9,6 +9,14 @@ module.exports.logger = function(){
       new winston.transports.File({ filename: 'exceptions.log' })
     ]
   });
+
+  var awsoptions = {
+    logGroupName: 'whaddaeat',
+    logStreamName: 'applicationlog',
+    awsRegion: 'eu-west-1'
+  };
+  logger.add(require('winston-cloudwatch'), awsoptions);
+
   logger.level = 'debug';
   return logger;
 }
