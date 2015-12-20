@@ -62,9 +62,11 @@ module.exports.getfoodbyname = function( foodcollection, name, callback){
 module.exports.random = function(creatorId, callback){
   module.exports.connect('foods',function(collection){
      module.exports.getfoods(collection, creatorId, function(foods){
-        logger.info('randomizing selection of foods, count '+foods.length);
 
-        value = foods[Math.floor(Math.random()*foods.length)];
+        var position = Math.floor(Math.random()*foods.length);
+        logger.info('randomizing selection of foods, count '+foods.length+' position, '+position);
+
+        value = foods[position];
         value.status = 'ok';
         callback( value );
     })
