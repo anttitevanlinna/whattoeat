@@ -6,10 +6,14 @@ responseHandler = function(callback){
 		var body = '';
 	    res.on('data', function(d) {
 	        body += d;
+	        logger.info(d);
 	    });
 	    res.on('end', function() {
-	        logger.info('Calling back from server response with '+body);	
+	        logger.info('Calling back from server response with :'+body+':');	
 	        callback(JSON.parse(body));
+	    })
+	    res.on('error', function(error){
+	    	logger.info(error);
 	    });
 	}
 }

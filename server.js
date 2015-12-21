@@ -1,6 +1,7 @@
 var express = require('express');
 var db = require('./db');
 var fb = require('./fb');
+var edaman = require('./edaman');
 var logger = require('./logger').logger();
 
 var app = express();
@@ -31,11 +32,11 @@ app.get('/api/randomfood', function(request, response) {
 });
 
 app.get('/api/count', function(request, response) {
-  logger.info('count');
+  logger.info('count '+request.query.accessToken.substring(0,4));
   if(request.query.accessToken){
   	fb.me(request.query.accessToken, function(user){
 		logger.info('calling db for count: '+user.id);
-		db.countfoods(user.id, function(item){
+			db.countfoods(user.id, function(item){
 			logger.info('counted: '+item);
       		response.send(String(item)); 
   		});
@@ -57,6 +58,13 @@ app.post('/api/add', function(request, response){
   		response.send('{error}');
   	}
   });
+});
+
+app.get('/api/query', function(request, response) {
+  	logger.info('query '+request.query.q);
+	edaman.query(request.query.q, function(data){
+		response.send(data); 
+	});
 });
 
 app.listen(app.get('port'), function() {

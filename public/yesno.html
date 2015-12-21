@@ -9,7 +9,7 @@
     </h1>
     <div class="panel panel-default" ng-show="user && count > 0">
       <div class="panel-body">
-        <input type="checkbox" ng-model="$parent.limit"/>
+        <input type="checkbox" ng-model="limit"/>
         <span ng-show="limit">Limiting to the foods you've added</span>
         <span ng-hide="limit">You can limit suggestions to the the ones you've added. <span ng-show="count > 0"> You've {{count}} foods to choose from. </span>
       </div>

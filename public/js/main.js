@@ -1,4 +1,3 @@
-
 var foods = angular.module('foods', ['facebook','ngRoute','ngAnimate'])
 var fbProvider;
 
@@ -11,19 +10,17 @@ foods.config(
       $routeProvider.when('/food', {
                 templateUrl : 'food.html',
                 controller  : 'foodController'
-            });
+      });
       $routeProvider.when('/why', {
-                templateUrl : 'why.html',
-                controller  : 'mainController'
-            });
+                templateUrl : 'why.html'
+      });
       $routeProvider.when('/code', {
-                templateUrl : 'code.html',
-                controller  : 'mainController'
-            });
+                templateUrl : 'code.html'
+      });
       $routeProvider.otherwise( {
                 templateUrl : 'yesno.html',
-                controller  : 'foodController'
-            });
+                controller  : 'mainController'
+      });
    }])
 
 foods.run(['$http', function($http) {
@@ -35,20 +32,18 @@ foods.run(['$http', function($http) {
   });
 }]);
 
-function foodController($scope, $http, Facebook) {
-
-}
-
 function mainController($scope, $http, Facebook) {
 
   $http.get('/api/randomfood').success(function(data) {
-    $scope.currentfood = data;
+    $scope.$parent.currentfood = data;
   }).error(function(data) {
     console.log('Error: ' + data);
   });
   $scope.formData = {};
+  console.log('mainController.init');
 
   $scope.updateCount = function(){
+    console.log('count');
     if($scope.accessToken){
       $http.get('api/count'+'?accessToken='+$scope.accessToken)
         .success(function(data) {
@@ -61,7 +56,6 @@ function mainController($scope, $http, Facebook) {
       $scope.count = 0;      
     }
   }
-
 
   $scope.login = function () {
     ga('send', 'event', 'foods', 'login');
@@ -79,14 +73,13 @@ function mainController($scope, $http, Facebook) {
     });
   };
 
-  
   $scope.$watch(function() {
     return Facebook.isReady();
   }, function(newVal) {
     if (newVal) {
         Facebook.getLoginStatus(function(response){
           if (response.status === 'connected') {
-            var uid = response.authResponse.userID;
+            console.log('fb ready');
             $scope.accessToken = response.authResponse.accessToken;
             $scope.api();        
             $scope.updateCount();    
@@ -107,7 +100,6 @@ function mainController($scope, $http, Facebook) {
     }
   });
 
-
   $scope.add = function() {
 
     ga('send', 'event', 'foods', 'add');
@@ -122,7 +114,7 @@ function mainController($scope, $http, Facebook) {
       if( data.status == 'already_exists' ){
         data.name = data.name + ' (we got that already)';
       }
-      $scope.currentfood = data;
+      $scope.$parent.currentfood = data;
     }).error(function(data) {
       console.log('Error: ' + data);
     });
@@ -142,12 +134,10 @@ function mainController($scope, $http, Facebook) {
 
     $http.get(apiUrl, $scope.formData)
       .success(function(data) {
-        $scope.currentfood = data;
+        $scope.$parent.currentfood = data;
       })
       .error(function(data) {
         console.log('Error: ' + data);
       });
   };
 }
-
-
