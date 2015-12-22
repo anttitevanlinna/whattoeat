@@ -37,7 +37,7 @@ a:hover, a:active {
 }
 
 .topmargin{
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .btn{
@@ -58,9 +58,10 @@ a:hover, a:active {
 }
 
 .reveal-animation.ng-enter {
-  -webkit-animation: enter_sequence 0.3s linear; /* Safari/Chrome */
-  animation: enter_sequence 0.3s linear; /* IE10+ and Future Browsers */
+  -webkit-animation: enter_sequence 0.5s linear; /* Safari/Chrome */
+  animation: enter_sequence 0.5s linear; /* IE10+ and Future Browsers */
 }
+
 @-webkit-keyframes enter_sequence {
   from { opacity:0.6; }
   to { opacity:1; }
@@ -71,8 +72,8 @@ a:hover, a:active {
 }
 
 @media (min-width: 768px) {
-.navbar-nav-heavy {
-  font-size: 24px;
-}
+  .navbar-nav-heavy {
+    font-size: 24px;
+  }
 }
   
