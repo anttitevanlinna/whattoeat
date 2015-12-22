@@ -24,14 +24,12 @@
       <img class="img-thumbnail" ng-src="{{food.recipe.image}}">
     </div>
     <div class="col-md-8 col-xs-12 opaque" >
-      <div class="container">
-        <h1>
-          {{food.recipe.label}}
-        </h1>
-        <p class="text-center">
-          <a class="btn btn-lg btn-primary" href="#" role="button">To the Recipe</a>
-        </p>
-      </div>
+      <h1>
+        {{food.recipe.label}}
+      </h1>
+      <p class="text-center">
+        <a class="btn btn-lg btn-primary" href="{{food.recipe.shareAs}}" role="button">To the Recipe</a>
+      </p>
     </div>
   </div>
 </div>
