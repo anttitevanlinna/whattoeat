@@ -7,7 +7,18 @@
         </span>
       </small>
     </h1>
-    <div class="panel panel-default" ng-show="user && count > 0">
+    <div class="panel panel-default" ng-show="!user && hideTip" class="reveal-animation">
+      <div class="panel-body">
+        <span>Showing you a random dish. Click next for another choise.</span>
+      </div>
+    </div>
+    <div class="panel panel-default" ng-hide="user || hideTip" class="reveal-animation">
+      <div class="panel-body">
+        <span>Showing you choises from all users. By logging in, you can add your own and
+        restrict to your dishes. However, feel free to keep clicking next.</span>
+      </div>
+    </div>
+    <div class="panel panel-default" ng-show="user && count > 0" class="reveal-animation">
       <div class="panel-body">
         <input type="checkbox" ng-model="limit"/>
         <span ng-show="limit">Limiting to the foods you've added</span>

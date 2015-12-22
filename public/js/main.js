@@ -40,6 +40,7 @@ function mainController($scope, $http, Facebook) {
     console.log('Error: ' + data);
   });
   $scope.formData = {};
+  $scope.hideTip = true;
   console.log('mainController.init');
 
   $scope.updateCount = function(){
@@ -135,6 +136,7 @@ function mainController($scope, $http, Facebook) {
     $http.get(apiUrl, $scope.formData)
       .success(function(data) {
         $scope.$parent.currentfood = data;
+        $scope.hideTip = false;
       })
       .error(function(data) {
         console.log('Error: ' + data);
